@@ -1,0 +1,42 @@
+.list{
+    background: hsl(187,85%,43%);
+    color: rgb(239,239,239);
+    width: 100%;
+    position: relative;
+    display: flex;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    flex-direction: column;
+    gap: 1rem;
+    .titleDiv{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        .title{
+            font-size: 1.5rem;
+            
+        }
+        p{
+            font-size: 15px;
+        }
+    }
+    .secContent{
+        width: 100%;
+        table,th,td{
+            border: 1px solid hsla(199, 100%, 33%, 0.46);
+            text-align: center;
+            font-size: 15px;
+            padding: .5rem;
+            
+        }
+        table{
+            width: 100%;
+            p{
+                font-size: 11px;
+            }
+        }
+    }
+}
