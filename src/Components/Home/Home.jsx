@@ -7,10 +7,10 @@ import img from '../../Assets/ridge1.jpg';
 import { MainList } from '../MainList';
 
 //import { useLocation } from 'react-router-dom';
-const Home = ({setFormattedDate, filteredServices, setFilteredServices,title, setTitle,showList, setShowList,leavingFrom,setLeavingFrom,goingTo,setGoingTo}) => {
-  useEffect(()=>{
-    Aos.init({duration:2000})
-  },[])
+function Home({  showList,/* formattedDate, setFormattedDate,*/title, setTitle, setShowList, leavingFrom, setLeavingFrom, goingTo, setGoingTo }) {
+  useEffect(() => {
+    Aos.init({ duration: 2000 });
+  }, []);
   const getCurrentDate = () => {
     const date = new Date();
     const year = date.getFullYear();
@@ -35,21 +35,21 @@ const Home = ({setFormattedDate, filteredServices, setFilteredServices,title, se
   const [goingTo, setGoingTo] = useState('');
   */
   const [selectedDate, setSelectedDate] = useState(getCurrentDate());
-  {/*const [filteredServices, setFilteredServices] = useState([]);
-  const [title, setTitle] = useState('Source - Destination');
-  const [formattedDate, setFormattedDate] = useState('');
-*/}
+  const [filteredServices, setFilteredServices] = useState([]);
+   // const [title, setTitle] = useState('Source - Destination');
+    const [formattedDate, setFormattedDate] = useState('');
+  
   useEffect(() => {
     const formatted = selectedDate.split('-').reverse().join('-');
     setFormattedDate(formatted);
   }, [selectedDate]);
   const filterServices = () => {
     return MainList.filter(service => {
-      
+
       if (leavingFrom && !service.origin.toLowerCase().includes(leavingFrom.toLowerCase())) {
         return false;
       }
-      if (goingTo && (!service.destination.toLowerCase().includes(goingTo.toLowerCase()) && !service.via.toLowerCase().includes(goingTo.toLowerCase())))  {
+      if (goingTo && (!service.destination.toLowerCase().includes(goingTo.toLowerCase()) && !service.via.toLowerCase().includes(goingTo.toLowerCase()))) {
         return false;
       }
       if (selectedDate) {
@@ -78,8 +78,8 @@ const Home = ({setFormattedDate, filteredServices, setFilteredServices,title, se
       setTitle(`${leavingFrom} - ${goingTo}`);
     }
     setShowList(
-      {display:'block'}
-    )
+      { display: 'block' }
+    );
   };
   return (
     <section id='home'>
@@ -87,90 +87,88 @@ const Home = ({setFormattedDate, filteredServices, setFilteredServices,title, se
       <img src={img} alt="" />
       <div className="homeContent container">
         {/*<div className="textDiv">
-          <h3 className="homeTitle">Search for vehicle</h3>
-        </div>
-       */}
+              <h3 className="homeTitle">Search for vehicle</h3>
+            </div>
+           */}
         <div data-aos='fade-up' className="cardDiv grid">
-        <h3 className="homeTitle">Search for vehicle</h3>
-          <div  class="inputField">
-          <div className="sourceInput">
-            {/*<label htmlFor="city">Search your destination</label>*/}
-            <div className="input flex">
-              <input type="text" name="" id="" placeholder='Leaving from' onChange={(e) => setLeavingFrom(e.target.value)} value={leavingFrom}/>
-              <FaLocationDot className='icon' />
+          <h3 className="homeTitle">Search for vehicle</h3>
+          <div class="inputField">
+            <div className="sourceInput">
+              {/*<label htmlFor="city">Search your destination</label>*/}
+              <div className="input flex">
+                <input type="text" name="" id="" placeholder='Leaving from' onChange={(e) => setLeavingFrom(e.target.value)} value={leavingFrom} />
+                <FaLocationDot className='icon' />
+              </div>
             </div>
-          </div>
-          <div className="destinationInput">
-           {/* <label htmlFor="city">Search your destination</label>*/}
-            <div className="input flex">
-              <input type="text" name="" id="" placeholder='Going to' onChange={(e) => setGoingTo(e.target.value)} value={goingTo}/>
-              <FaLocationDot className='icon' />
+            <div className="destinationInput">
+              {/* <label htmlFor="city">Search your destination</label>*/}
+              <div className="input flex">
+                <input type="text" name="" id="" placeholder='Going to' onChange={(e) => setGoingTo(e.target.value)} value={goingTo} />
+                <FaLocationDot className='icon' />
+              </div>
             </div>
-          </div>
-          <div className="dateInput">
-            {/*<label htmlFor="city">Search your destination</label>*/}
-            <div className="input flex">
-              <input type='date' name="" id="" value={selectedDate} onChange={(e) => setSelectedDate(e.target.value)} />
-              
+            <div className="dateInput">
+              {/*<label htmlFor="city">Search your destination</label>*/}
+              <div className="input flex">
+                <input type='date' name="" id="" value={selectedDate} onChange={(e) => setSelectedDate(e.target.value)} />
+
+              </div>
             </div>
-          </div>
           </div>
           <div className='search'>
             <div className='input flex search'>
-              <input type="submit" value="Search" id='' placeholder='search' onClick={applyFilters}/>
+              <input type="submit" value="Search" id='' placeholder='search' onClick={applyFilters} />
             </div>
           </div>
-          {/*{filteredServices.length > 0 && (
-          <section data-aos='fade-up' style={showList} className='list'>
-        <div className="titleDiv">
-            <h1 className='title'>{title}</h1>
-            <span>
-                <p>{formattedDate}</p>
-            </span>
-        </div>
-        <div className="secContent">
-            <table>
-                <tr>
+          {filteredServices.length > 0 && (
+            <section data-aos='fade-up' style={showList} className='list'>
+              <div className="titleDiv">
+                <h1 className='title'>{title}</h1>
+                <span>
+                  <p>{formattedDate}</p>
+                </span>
+              </div>
+              <div className="secContent">
+                <table>
+                  <tr>
                     <th>Service No.</th>
                     <th>Departure Time - Arrival Time</th>
                     <th>Origin - Destination</th>
                     <th>Type</th>
-                </tr>
-                
-                {
-                    filteredServices.map((e,i)=>{
-                        return(
-                            <tr key={i}>
-                                <td>{e.serviceNo}</td>
-                                <td>{e.departureTime} - {e.arrivalTime}</td>
-                                <td>{e.origin} - {e.destination}<br/><p>{e.via}</p></td>
-                                <td>{e.busType}</td>
-                            </tr>
-                        );
-                    })
-                }
-            </table>
-        </div>
-          </section>
-           )}*/}
+                  </tr>
+
+                  {filteredServices.map((e, i) => {
+                    return (
+                      <tr key={i}>
+                        <td>{e.serviceNo}</td>
+                        <td>{e.departureTime} - {e.arrivalTime}</td>
+                        <td>{e.origin} - {e.destination}<br /><p>{e.via}</p></td>
+                        <td>{e.busType}</td>
+                      </tr>
+                    );
+                  })}
+                </table>
+              </div>
+            </section>
+          )}
         </div>
         {/*<div>
-        {
-                    filteredServices.map((e,i)=>{
-                        return(
-                            <tr key={i}>
-                                <td>{e.serviceNo}</td>
-                                <td>{e.departureTime} - {e.arrivalTime}</td>
-                                <td>{e.origin} - {e.destination}<br/><p>{e.via}</p></td>
-                            </tr>
-                        );
-                    })
-                }
-        </div>*/}
+            {
+                        filteredServices.map((e,i)=>{
+                            return(
+                                <tr key={i}>
+                                    <td>{e.serviceNo}</td>
+                                    <td>{e.departureTime} - {e.arrivalTime}</td>
+                                    <td>{e.origin} - {e.destination}<br/><p>{e.via}</p></td>
+                                </tr>
+                            );
+                        })
+                    }
+            </div>*/}
       </div>
-      
+
     </section>
-  )
+  );
 }
 
 export default Home

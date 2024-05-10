@@ -11,9 +11,9 @@ import Updates from './Components/Updates/Updates';
 import { collection,getDocs } from 'firebase/firestore';
 import { db } from './firebase';
 const App = () => {
-  const [filteredServices, setFilteredServices] = useState([]);
+  //const [filteredServices, setFilteredServices] = useState([]);
   const [title, setTitle] = useState('Source - Destination');
-  const [formattedDate, setFormattedDate] = useState('');
+  //const [formattedDate, setFormattedDate] = useState('');
   const [contacts,setContacts]=useState([]);
   
   useEffect(()=>{
@@ -46,7 +46,8 @@ const App = () => {
   return (
     <>
     <Navbar/>
-    <Home  setFilteredServices={ setFilteredServices}  setTitle={setTitle}  setFormattedDate={setFormattedDate}  setShowList={setShowList} leavingFrom={leavingFrom} setLeavingFrom={setLeavingFrom} goingTo={goingTo} setGoingTo={setGoingTo}/>
+    <Home showList={showList} title={title}  /*formattedDate={formattedDate} */ setTitle={setTitle} /* setFormattedDate={setFormattedDate}*/  setShowList={setShowList} leavingFrom={leavingFrom} setLeavingFrom={setLeavingFrom} goingTo={goingTo} setGoingTo={setGoingTo}/>
+     {/*
     {filteredServices.length > 0 && (
           <section data-aos='fade-up' style={showList} className='list'>
         <div className="titleDiv">
@@ -79,7 +80,7 @@ const App = () => {
             </table>
         </div>
     </section>
-    )}
+    )}*/}
     <Main  setShowList={setShowList}  setLeavingFrom={setLeavingFrom} setGoingTo={setGoingTo}/>
     <Updates/>
     <Gallery/>
