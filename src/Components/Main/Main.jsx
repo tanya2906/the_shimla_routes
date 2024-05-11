@@ -4,7 +4,7 @@ import Aos from 'aos';
 import 'aos/dist/aos.css';
 
 import {db} from '../firebase';
-import { collection,getDocs, onSnapshot } from 'firebase/firestore';
+import { collection,getDocs } from 'firebase/firestore';
 const Main = ({ setShowList,setLeavingFrom,setGoingTo}) => {
   useEffect(()=>{
     Aos.init({duration:2000})
