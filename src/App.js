@@ -7,35 +7,9 @@ import Main from './Components/Main/Main';
 import Footer from './Components/Footer/Footer';
 import Gallery from './Components/Gallery/Gallery';
 import Updates from './Components/Updates/Updates';
-//import db from './firebase';
-import { collection,getDocs } from 'firebase/firestore';
-import { db } from './firebase';
+
 const App = () => {
-  //const [filteredServices, setFilteredServices] = useState([]);
-  const [title, setTitle] = useState('Source - Destination');
-  //const [formattedDate, setFormattedDate] = useState('');
-  const [contacts,setContacts]=useState([]);
   
-  useEffect(()=>{
-    const getContacts=async()=>{
-      try{
-        const contactsRef=collection(db,'routes');
-        const contactsSnapshot=await getDocs(contactsRef);
-        const contactLists=contactsSnapshot.docs.map((doc)=>{
-          return{
-            id: doc.id,
-            ...doc.data(),
-          }
-        });
-        setContacts(contactLists);
-       // console.log(contactLists);
-      }
-      catch(error){
-        console.log(error);
-      }
-    }
-    getContacts();
-  },[]);
   const [leavingFrom, setLeavingFrom] = useState('');
   const [goingTo, setGoingTo] = useState('');
   const [showList, setShowList]=useState(
@@ -46,7 +20,7 @@ const App = () => {
   return (
     <>
     <Navbar/>
-    <Home showList={showList} title={title}  /*formattedDate={formattedDate} */ setTitle={setTitle} /* setFormattedDate={setFormattedDate}*/  setShowList={setShowList} leavingFrom={leavingFrom} setLeavingFrom={setLeavingFrom} goingTo={goingTo} setGoingTo={setGoingTo}/>
+    <Home showList={showList}  setShowList={setShowList} leavingFrom={leavingFrom} setLeavingFrom={setLeavingFrom} goingTo={goingTo} setGoingTo={setGoingTo}/>
      {/*
     {filteredServices.length > 0 && (
           <section data-aos='fade-up' style={showList} className='list'>
@@ -85,7 +59,7 @@ const App = () => {
     <Updates/>
     <Gallery/>
     <Footer/>
-    <div>
+   {/* <div>
       {
         contacts.map((contact=>(
           <div key={contact.id}>
@@ -110,7 +84,7 @@ const App = () => {
           </div>
         )))
       }
-    </div>
+    </div> */}
     </>
   )
 }

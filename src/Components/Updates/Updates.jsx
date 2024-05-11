@@ -27,7 +27,7 @@ const Updates = () => {
             <h3 className="title">News & Events</h3>
         </div>
         <div className="secContent"  >
-            <marquee onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} behavior="scroll" direction="up" scrollamount="2" scrollDelay="100" loop='infinite'>
+            <marquee onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} behavior="scroll" direction="up" scrollamount="2" scrolldelay="100" loop='infinite'>
               { UpdatesList.map((e,i)=>{
                 return(
                   <p key={i}>{e.content}</p>
