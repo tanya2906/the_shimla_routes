@@ -155,7 +155,7 @@ const galleryIMG=[
     },
     {
         id:31,
-        src:img32
+        src:img31
     },
     {
         id:32,

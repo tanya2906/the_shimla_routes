@@ -8,6 +8,7 @@ import Footer from './Components/Footer/Footer';
 import Gallery from './Components/Gallery/Gallery';
 import Updates from './Components/Updates/Updates';
 
+
 const App = () => {
   
   const [leavingFrom, setLeavingFrom] = useState('');
