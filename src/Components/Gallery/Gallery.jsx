@@ -68,20 +68,20 @@ const Gallery = () => {
             <img src={currentImg} alt=""/>
             <IoMdCloseCircle className='icon' onClick={()=>setModel(false)}/>
         </div>
-        <div className='secContent '>
+        <div  className='secContent '>
             {
                 galleryIMG.filter(e=>e.id<=imgCount).map((e,i)=>{
                     
                     return(
-                        <div data-aos='fade-up'  key={i} className='imgDiv' onClick={()=>getImg(e.src)}>
-                            <img src={e.src} alt="" style={{width:'100%'}}/>
+                        <div key={i} className='imgDiv' onClick={()=>getImg(e.src)}>
+                            <img data-aos='fade-up'src={e.src} alt="" />
                         </div>
                     );
                 })
                     
             }
         </div>
-        <span onClick={() => changeCount()}>{text}</span>
+        <span className='toggleBtn' onClick={() => changeCount()}>{text}</span>
         
     </section>
   )

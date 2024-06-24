@@ -38,7 +38,7 @@ const Footer = () => {
         <div className="contactDiv flex">
           <div data-aos='fade-up'className='text'>
               <small>KEEP IN TOUCH</small>
-              <h2>{/*Travel*/}Find with us</h2>
+              <h2>{/*Travel*/}Find route with us</h2>
           </div>
           <form ref={form} onSubmit={sendEmail}>
           <div  data-aos='fade-up' className="inputDiv flex">
@@ -51,10 +51,10 @@ const Footer = () => {
           </div>
           </form>
         </div>
-        <div data-aos='fade-up' className="footerCard flex">
+        <div  className="footerCard flex">
           <div className="footerIntro flex">
             <div data-aos='fade-right' data-aos-duration="5000" className="logoDiv">
-              <a href="#" className="logo flex">
+              <a href="#home" className="logo flex">
                 The Shimla Routes
               </a>
             </div>
@@ -63,67 +63,49 @@ const Footer = () => {
             <a href="https://www.facebook.com/profile.php?id=61559316126648" target='__blank'><FaFacebook className='icon'/></a>
             </div>
           </div>
-          {/* 
           <div className="footerLinks grid">
             <div data-aos='fade-right' data-aos-duration="5000" className="linkGroup">
-              <span className="groupTitle">OUR AGENCY</span>
+              <span className="groupTitle">SERVICES</span>
               <li className="footerList flex">
               <FaChevronRight className='icon'/>
-              Services
+              <a href="#home">Check Routes</a>
               </li>
               <li className="footerList flex">
               <FaChevronRight className='icon'/>
-              Services
+              <a href="#main">Popular Routes</a>
               </li>
               <li className="footerList flex">
               <FaChevronRight className='icon'/>
-              Services
+              <a href="#updates">Updates</a>
               </li>
               <li className="footerList flex">
               <FaChevronRight className='icon'/>
-              Services
+              <a href="#gallery">Photos</a>
               </li>
             </div>
+            {/*
             <div data-aos='fade-right' data-aos-duration="5000" className="linkGroup">
-              <span className="groupTitle">OUR AGENCY</span>
+              <span className="groupTitle">SERVICES</span>
               <li className="footerList flex">
               <FaChevronRight className='icon'/>
-              Services
+              <a href="#home">Check Routes</a>
               </li>
               <li className="footerList flex">
               <FaChevronRight className='icon'/>
-              Services
+              <a href="#main">Popular Routes</a>
               </li>
               <li className="footerList flex">
               <FaChevronRight className='icon'/>
-              Services
+              <a href="#updates">Updates</a>
               </li>
               <li className="footerList flex">
               <FaChevronRight className='icon'/>
-              Services
-              </li>
-            </div>
-            <div data-aos='fade-right' data-aos-duration="5000" className="linkGroup">
-              <span className="groupTitle">OUR AGENCY</span>
-              <li className="footerList flex">
-              <FaChevronRight className='icon'/>
-              Services
-              </li>
-              <li className="footerList flex">
-              <FaChevronRight className='icon'/>
-              Services
-              </li>
-              <li className="footerList flex">
-              <FaChevronRight className='icon'/>
-              Services
-              </li>
-              <li className="footerList flex">
-              <FaChevronRight className='icon'/>
-              Services
+              <a href="#gallery">Photos</a>
               </li>
             </div>
+            */}
           </div>
-          */}
+          
           <div className="footerDiv flex">
             <small>BEST ROUTE WEBSITE</small>
             <small>COPYRIGHTS RESERVED - TANYA2024</small>

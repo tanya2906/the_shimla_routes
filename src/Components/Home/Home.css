@@ -61,6 +61,14 @@
                     grid-template-columns: auto;
                     transition: .5s ease-in-out;
                 }
+                .dateInput{
+                    .input{
+                        width: 100%;
+                        input{
+                            width: 100%;
+                        }
+                    }
+                }
             }
             .homeTitle{
                 color:hsl(240,4%,36%);
@@ -76,6 +84,8 @@
                 background: rgb(239,239,239);
                 border-radius: 3rem;
                 position: relative;
+                width: 100%;
+                justify-content: space-between;
                 input{
                     background: none;
                     border: none;
@@ -87,21 +97,23 @@
                     &::placeholder{
                         font-size: 13px;
                     }
-                    &::after{
-                        content: '\1F4C5'; /* Unicode for the calendar icon */
-                        font-size: 18px; /* Adjust icon size */
-                        color: hsl(199,100%,33%); 
-                        pointer-events: none; /* Make sure the icon is not clickable */
+                    /*&::after{
+                        content: '\1F4C5'; 
+                        font-size: 18px; 
+                        color: #333;
+                        pointer-events: none; 
                         position: absolute;
                         top: 50%;
-                        right: 15px; /* Adjust icon position */
+                        right: 16.5px; 
                         transform: translateY(-50%);}
+                        */  
                 }
                
                 .icon{
                     font-size: 18px;
                     color: hsl(199,100%,33%);
                     pointer-events: none;
+                    
                     /*margin: 10px;*/
                 }
                 
@@ -139,6 +151,8 @@
 }
 /*list*/
 .list{
+    overflow: scroll;
+    overflow-y: visible;
     background: hsl(187,85%,43%);
     color: rgb(239,239,239);
     width: 100%;
@@ -155,12 +169,16 @@
         align-items: center;
         justify-content: space-between;
         width: 100%;
+        gap: 10px;
         .title{
             font-size: 1.5rem;
             
         }
         p{
             font-size: 15px;
+            
+            width: 6rem;
+            text-align: right;
         }
     }
     .secContent{
@@ -172,10 +190,40 @@
             padding: .5rem;
             
         }
+        .th1{min-width: 6rem;}
+        .th2{min-width: 9rem;}
+        .th3{min-width: 10rem;}
+        .th4{min-width: 4rem;}
         table{
             width: 100%;
             p{
                 font-size: 11px;
+            }
+        }
+    }
+}
+@media screen and (max-width:700px){
+    .list{
+        padding: 2rem 0;
+        .titleDiv{
+            flex-direction: column;
+            margin-bottom: 10px;
+            align-items: flex-start;
+            padding: 0 1rem ;
+            p{
+                width: 100%;
+                text-align: left;
+            }
+        }
+    }
+}
+@media screen and (max-width:500px){
+    .list{
+        
+        .titleDiv{
+            
+            .title{
+                font-size: 1.2rem;
             }
         }
     }

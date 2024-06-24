@@ -6,6 +6,7 @@
     align-items: center;
     justify-content: center;
     margin: auto;
+    
     .imgDiv{
         position: absolute;
         height: 100%;
@@ -27,6 +28,7 @@
 
     }
     .secContent{
+        position: relative;
         width: 100%;
         height: max-content;
         padding: 2rem initial;
@@ -35,7 +37,7 @@
         justify-content: center;
         flex-direction: column;
         margin: auto;
-        row-gap: 2rem;
+        row-gap: 3rem;
         z-index: 100;
         .contactDiv{
             justify-content: space-between;
@@ -93,12 +95,13 @@
             flex-direction: column;
             align-items: flex-start;
             overflow: hidden;
+
             .footerIntro{
                 flex-basis: 50%;
                 justify-content: center;
                 align-items: flex-start;
                 flex-direction: column;
-                row-gap: .5rem;
+                row-gap: .2rem;
                 .logoDiv{
                     .logo{
                         color: hsl(201,33%,16%);
@@ -124,19 +127,29 @@
                 grid-template-columns: repeat(2,1fr);
                 justify-content: space-between;
                 .linkGroup{
+                    
                     .groupTitle{
                         display:block;
-                        font-size: 15px;
+                        font-size: 13px;/*font-size: 15px;*/
                         font-weight:600 ;
                         color: hsl(201,33%,16%);
                         margin-bottom: .5rem;
                     }
                     .footerList{
-                        font-size: 15px;
+                        
                         color: hsl(240,4%,36%);
                         transition: .3s ease-in-out;
+                        a{
+                            font-size: 12px;/*font-size: 15px;*/
+                            color: hsl(240,4%,36%);
+                            &:hover{
+                                color:hsl(199,100%,33%);
+                                transform: translate(7px);
+                                
+                            }
+                        }
                         .icon{
-                            font-size: 15px;
+                            font-size: 12px;/*font-size: 15px;*/
                             color: rgb(190,190,190);
                         }
                         &:hover{
@@ -168,10 +181,24 @@
 @media  (min-width:500px) {
     #footer{
         .secContent{
+            gap: 5rem;
             .footerCard{
                 .footerLinks{
                     grid-template-columns: repeat(3,1fr);
                     padding-bottom: 1rem;
+                    .linkGroup{
+                        .groupTitle{
+                            font-size: 15px;
+                        }
+                        .footerList{
+                            a{
+                                font-size: 15px;
+                            }
+                            .icon{
+                                font-size: 15px;
+                            }
+                        }
+                    }
                 }
                 .footerDiv{
                     justify-content: space-between;
@@ -181,6 +208,7 @@
                         color: hsl(0,0%,100%);
                     }
                 }
+                
             }
             
         }
@@ -193,8 +221,12 @@
         .secContent{
             
             .contactDiv{
-                flex-direction: row;
+                
+                flex-direction: column;
                 justify-content: space-between;
+                .text{
+                    text-align: center;
+                }
                 .inputDiv{
                     width: max-content;
                     flex-direction: row;

@@ -59,7 +59,7 @@ const Main = ({ setShowList,setLeavingFrom,setGoingTo}) => {
   )
  }
   return (
-    <section className='main container section'>
+    <section className='main container section' id='main'>
       <div data-aos='fade-right' className="secTitle">
         <h1 className="title">Most Popular Routes</h1>
       </div>

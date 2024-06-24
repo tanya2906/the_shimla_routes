@@ -4,13 +4,16 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  
 }
 html{
   scroll-behavior: smooth;
 }
 body{
-  
+  overflow-y: scroll;
+  overflow-x: hidden;
   background: rgb(240,240,246);
+  
 }
 a{
   text-decoration: none;

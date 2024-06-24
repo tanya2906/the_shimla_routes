@@ -104,7 +104,22 @@
         }
     }
     
-}/*
+}
+@media screen and (max-width:500px) {
+    
+    .header{
+        
+        width: 100vw;
+        
+        .logoDiv{
+            
+            #logo{
+                font-size: 20px;
+            }
+        }
+    }
+}
+/*
 @media screen and (min-width:769px){
     .toggleNavBar,.closeNavBar{
         display: none;

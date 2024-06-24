@@ -30,7 +30,7 @@ const Navbar = () => {
               <a href="#gallery" className='navLink'>Gallery</a>
             </li>
             <li className='navItem'>
-              <a href="#footer" className='navLink'>Feedback</a>
+              <a href="#footer" className='navLink'>Contact Us</a>
             </li>
           </ul>
           <div onClick={removeNav} className={closeBTN}>

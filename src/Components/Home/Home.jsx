@@ -4,7 +4,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 import img from '../../Assets/ridge1.jpg';
-import { MainList } from '../MainList';
+
 import {db} from '../firebase';
 import { collection,getDocs, onSnapshot } from 'firebase/firestore';
 //import { useLocation } from 'react-router-dom';
@@ -30,6 +30,9 @@ function Home({  showList, setShowList, leavingFrom, setLeavingFrom, goingTo, se
   const [formattedDate, setFormattedDate] = useState('');
   const [selectedDate, setSelectedDate] = useState(getCurrentDate());
   //const [filteredServices, setFilteredServices] = useState([]);
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
   useEffect(() => {
     const formatted = selectedDate.split('-').reverse().join('-');
     setFormattedDate(formatted);
@@ -63,65 +66,8 @@ function Home({  showList, setShowList, leavingFrom, setLeavingFrom, goingTo, se
   }, []);
   
   
-  /*
-  const applyFilters = () => {
-    if (!leavingFrom || !goingTo || !selectedDate) {
-      alert("Please fill in all fields.");
-      return;
-    }
-    //const filtered = filterServices();
-    //setFilteredServices(filtered);
-    const routesRef=collection(db,"routes");
-    onSnapshot(routesRef,(snapshot)=>{
-      const routesLists=snapshot.docs.map((doc)=>({
-        
-          id:doc.id,
-          ...doc.data(),
-          
-        }));
-        
-      
-      //console.log(routesLists);
-      const filteredRoutes=routesLists.filter(
-        (service) => {
-
-          if (leavingFrom && !service.origin.toLowerCase().includes(leavingFrom.toLowerCase())) {
-            return false;
-          }
-          if (goingTo && (!service.destination.toLowerCase().includes(goingTo.toLowerCase()) && !service.via.toLowerCase().includes(goingTo.toLowerCase()))) {
-            return false;
-          }
-          if (selectedDate) {
-            // Assuming service.day is in the format 'Monday', 'Tuesday', etc.
-            const serviceDate = new Date(selectedDate);
-            const serviceDay = serviceDate.toLocaleString('en-US', { weekday: 'long' });
-            if (service.day !== serviceDay) {
-              return false;
-            }
-          }
-          return true;
-        }
-      );
-      //setRoutes(filteredRoutes);
-      //console.log(routes);
-      //console.log(filteredRoutes);
-      //return filteredRoutes;
-
+  const normalizeString = (str) => str.replace(/\s+/g, '').toLowerCase();
     
-    if (filteredRoutes.length === 0) {
-      alert("No matching data found.");
-    }
-    else {
-      // Update the title when data is found
-      setTitle(`${leavingFrom} - ${goingTo}`);
-    }
-    setShowList(
-      { display: 'block' }
-    );
-    setRoutes(filteredRoutes);
-  });
-  };*/
-  //console.log(routes);
   const displayList=()=>{
     let c=0;
     if (!leavingFrom || !goingTo || !selectedDate) {
@@ -138,23 +84,29 @@ function Home({  showList, setShowList, leavingFrom, setLeavingFrom, goingTo, se
         }));
         routesLists.filter(
           (i) => {
-           if( i.origin.toLowerCase().includes(leavingFrom.toLowerCase()) &&
-            (i.destination.toLowerCase().includes(goingTo.toLowerCase()) || i.via.toLowerCase().includes(goingTo.toLowerCase())) &&
-              i.day.toLowerCase().includes(day.toLowerCase()))
+           if(
+            (normalizeString(i.origin).includes(normalizeString(leavingFrom)) ||
+            normalizeString(i.via).includes(normalizeString(leavingFrom))) &&
+            (normalizeString(i.destination).includes(normalizeString(goingTo)) ||
+             normalizeString(i.via).includes(normalizeString(goingTo))) &&
+            normalizeString(i.day).includes(normalizeString(day))
+          )
               {
                 c++;
+                setTitle(`${capitalizeFirstLetter(leavingFrom)} - ${capitalizeFirstLetter(goingTo)}`);
                 setShowList(
                   { display: 'block' }
                 );
                 return true;
               }
-
+              
             
           }
         );
         if(c===0)
           {
             setShowList({ display: 'none' });
+            alert('No result found!');
           }
         
       })
@@ -189,7 +141,7 @@ function Home({  showList, setShowList, leavingFrom, setLeavingFrom, goingTo, se
             <div className="dateInput">
               {/*<label htmlFor="city">Search your destination</label>*/}
               <div className="input flex">
-                <input type='date' name="" id="" value={selectedDate} onChange={(e) => (setSelectedDate(e.target.value),setShowList({ display: 'none' }))} />
+                <input style={{width:'100%'}} type='date' name="" id="" value={selectedDate} onChange={(e) => (setSelectedDate(e.target.value),setShowList({ display: 'none' }))} />
 
               </div>
             </div>
@@ -211,26 +163,25 @@ function Home({  showList, setShowList, leavingFrom, setLeavingFrom, goingTo, se
                 <table>
                   <thead>
                   <tr>
-                    <th>Service No.</th>
-                    <th>Departure Time - Arrival Time</th>
-                    <th>Origin - Destination</th>
-                    <th>Type</th>
+                    <th className='th1'>Service No.</th>
+                    <th className='th2'>Departure Time - Arrival Time</th>
+                    <th className='th3'>Origin - Destination</th>
+                    <th className='th4'>Type</th>
                   </tr>
                   </thead>
                   <tbody>
                   {routes.filter(
                     i=>(
-                      i.origin.toLowerCase().includes(leavingFrom.toLowerCase()) &&
-                      (i.destination.toLowerCase().includes(goingTo.toLowerCase()) || i.via.toLowerCase().includes(goingTo.toLowerCase())) &&
-                      i.day.toLowerCase().includes(day.toLowerCase())
-
+                      (normalizeString(i.origin).includes(normalizeString(leavingFrom))  || normalizeString(i.via).includes(normalizeString(leavingFrom)))&&
+                      (normalizeString(i.destination).includes(normalizeString(goingTo)) || normalizeString(i.via).includes(normalizeString(goingTo))) &&
+                      normalizeString(i.day).includes(normalizeString(day))
                     )
                   ).map((e) => {
                     return (
                       <tr key={e.id}>
                         <td>{e.serviceNo}</td>
                         <td>{e.departureTime} - {e.arrivalTime}</td>
-                        <td>{e.origin} - {e.destination}<br /><p>{e.via}</p></td>
+                        <td>{e.origin} - {e.destination}<br />{e.via ? <p>[{e.via}]</p> :null}</td>
                         <td>{e.busType}</td>
                       </tr>
                     );
