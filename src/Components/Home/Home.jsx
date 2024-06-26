@@ -51,7 +51,7 @@ function Home({  showList, setShowList, leavingFrom, setLeavingFrom, goingTo, se
             ...doc.data(),
           }
         });
-        setRoutes(routesLists);
+        setRoutes(sortRoutesByDepartureTime(routesLists));
        
       }
       catch(error){
@@ -67,7 +67,27 @@ function Home({  showList, setShowList, leavingFrom, setLeavingFrom, goingTo, se
   
   
   const normalizeString = (str) => str.replace(/\s+/g, '').toLowerCase();
-    
+  const sortRoutesByDepartureTime = (routes) => {
+    return routes.sort((a, b) => {
+      const timeA = new Date(`1970/01/01 ${convertTo24HourFormat(a.departureTime)}`);
+      const timeB = new Date(`1970/01/01 ${convertTo24HourFormat(b.departureTime)}`);
+      return timeA - timeB;
+    });
+  };
+  const convertTo24HourFormat = (time) => {
+    const [timePart, modifier] = time.split(' ');
+    let [hours, minutes] = timePart.split(':');
+
+    if (hours === '12') {
+      hours = '00';
+    }
+
+    if (modifier === 'PM') {
+      hours = parseInt(hours, 10) + 12;
+    }
+
+    return `${hours}:${minutes}`;
+  };
   const displayList=()=>{
     let c=0;
     if (!leavingFrom || !goingTo || !selectedDate) {
@@ -103,6 +123,7 @@ function Home({  showList, setShowList, leavingFrom, setLeavingFrom, goingTo, se
             
           }
         );
+        
         if(c===0)
           {
             setShowList({ display: 'none' });
